@@ -4,7 +4,7 @@ import { extractValidationData } from '../../common/utils/extractErrorData.js';
 
 const competitionSchema = z.object({
     name: z.string().min(1).max(40),
-    racerId: z.number().positive()
+    racerIds: z.array(z.number().positive())
 });
 
 export const validateCompetition = (data) => {

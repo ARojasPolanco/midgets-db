@@ -4,14 +4,23 @@ import Competition from './competition.model.js'
 export class CompetitionService {
 
     async createCompetition(data) {
-        const { name, racerId } = data;
+        const { name, racerIds } = data;
 
         try {
-            const competition = await Competition.create({ name, racerId });
+            let competition = await Competition.create({ name });
 
-            if (racerId && racerId.length > 0) {
-                await competition.setRacers(racerId);
+            if (racerIds && racerIds.length > 0) {
+                for (const racerId of racerIds) {
+                    // Buscar el corredor por su ID
+                    const racer = await Racer.findByPk(racerId);
+                    if (racer) {
+                        // Asociar el corredor con la competencia
+                        await competition.addRacer(racer);
+                    }
+                }
             }
+
+            competition = await competition.reload({ include: Racer });
 
             return competition;
         } catch (error) {
@@ -24,6 +33,7 @@ export class CompetitionService {
             where: {
                 status: 'waiting'
             },
+            include: Racer
         });
     }
 
@@ -31,7 +41,8 @@ export class CompetitionService {
         return await Competition.findOne({
             where: {
                 id
-            }
+            },
+            include: Racer
         });
     }
 

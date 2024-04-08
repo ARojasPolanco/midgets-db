@@ -13,16 +13,11 @@ const Competition = sequelize.define('competition', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    racerId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        field: 'racers_id'
-    },
     status: {
         type: DataTypes.ENUM('active', 'finish', 'pause', 'waiting'),
         allowNull: false,
         defaultValue: 'waiting'
     }
-})
+});
 
 export default Competition;

@@ -5,7 +5,7 @@ import { CompetitionService } from './competition_service.js'
 const competitionService = new CompetitionService();
 
 export const createCompetition = catchAsync(async (req, res, next) => {
-    const { hasError, errorMessages, competitionData } = validateCompetition(req.body)
+    const { hasError, errorMessages, competitionData } = validateCompetition(req.body);
 
     if (hasError) {
         return res.status(422).json({
@@ -14,10 +14,10 @@ export const createCompetition = catchAsync(async (req, res, next) => {
         });
     }
 
-    const competition = await competitionService.createCompetition(competitionData)
+    const competition = await competitionService.createCompetition(competitionData);
 
-    return res.status(201).json(competition)
-})
+    return res.status(201).json(competition);
+});
 
 export const findAllCompetition = catchAsync(async (req, res, next) => {
     const competition = await competitionService.findAllCompetition()
