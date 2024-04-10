@@ -1,4 +1,5 @@
 import { AppError, catchAsync } from '../../errors/index.js';
+import Racer from '../Racer/racer.model.js';
 import { validateCompetition } from './competition.schema.js'
 import { CompetitionService } from './competition_service.js'
 
@@ -91,3 +92,16 @@ export const finishCompetition = catchAsync(async (req, res, next) => {
         message: 'The competition has benn finished'
     })
 })
+
+export const markWinnerController = async (req, res) => {
+    try {
+        const competitionId = req.params.id;
+        const winnerId = req.body.winnerId;
+
+        const winner = await competitionService.selectWinner(competitionId, winnerId);
+
+        res.json({ winner });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};

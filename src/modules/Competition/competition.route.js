@@ -5,7 +5,8 @@ import {
     findOneCompetition,
     updateCompetition,
     updateStatusCompetition,
-    finishCompetition
+    finishCompetition,
+    markWinnerController
 } from './competition.controller.js';
 
 import { protect, protectAccountOwner, restrictTo } from "../Users/users.middleware.js";
@@ -23,3 +24,5 @@ router.route('/:id')
     .delete(protect, restrictTo('admin'), finishCompetition);
 
 router.patch('/:id/status', protect, restrictTo('admin'), updateStatusCompetition);
+
+router.post('/:id/winner', markWinnerController)

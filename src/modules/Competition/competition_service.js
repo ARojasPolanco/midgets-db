@@ -11,10 +11,8 @@ export class CompetitionService {
 
             if (racerIds && racerIds.length > 0) {
                 for (const racerId of racerIds) {
-                    // Buscar el corredor por su ID
                     const racer = await Racer.findByPk(racerId);
                     if (racer) {
-                        // Asociar el corredor con la competencia
                         await competition.addRacer(racer);
                     }
                 }
@@ -73,5 +71,29 @@ export class CompetitionService {
         return await competition.update({
             status: 'finish'
         })
+    }
+
+    async selectWinner(competitionId, winnerId) {
+        try {
+            const competition = await Competition.findOne({
+                where: {
+                    id: competitionId
+                },
+                include: Racer
+            });
+
+            if (!competition) {
+                throw new Error('Competición no encontrada');
+            }
+
+            const winner = competition.racers.find(racer => racer.id === winnerId);
+            if (!winner) {
+                throw new Error('Ganador no válido para esta competición');
+            }
+
+            return winner;
+        } catch (error) {
+            throw new Error('Error al seleccionar al ganador: ' + error.message);
+        }
     }
 }

@@ -11,7 +11,6 @@ const User = sequelize.define(
       type: DataTypes.INTEGER,
       field: "user_id",
     },
-
     name: {
       allowNull: false,
       type: DataTypes.STRING(),
@@ -21,21 +20,16 @@ const User = sequelize.define(
       type: DataTypes.STRING(),
       unique: true,
     },
-
     password: {
       allowNull: false,
       type: DataTypes.STRING(),
       unique: false,
     },
-
     role: {
       type: DataTypes.ENUM("normal", "admin"),
       allowNull: false,
       defaultValue: "normal"
     },
-
-    //dirección y metodo de pago / información del perfil
-
     status: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
