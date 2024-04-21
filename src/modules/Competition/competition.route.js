@@ -25,4 +25,4 @@ router.route('/:id')
 
 router.patch('/:id/status', protect, restrictTo('admin'), updateStatusCompetition);
 
-router.post('/:id/winner', markWinnerController)
+router.post('/:id/winner', protect, restrictTo('admin'), markWinnerController)

@@ -4,7 +4,6 @@ import { RacerService } from './racer_service.js';
 
 export const racerService = new RacerService();
 
-
 export const findAllRacer = catchAsync(async (req, res, next) => {
   const racer = await racerService.findAllRacer()
 
@@ -12,9 +11,7 @@ export const findAllRacer = catchAsync(async (req, res, next) => {
 });
 
 export const CreateRacer = catchAsync(async (req, res, next) => {
-  const { hasError, errorMessages, racerData } = validateRacer(
-    req.body
-  );
+  const { hasError, errorMessages, racerData } = validateRacer(req.body);
 
   if (hasError) {
     return res.status(422).json({

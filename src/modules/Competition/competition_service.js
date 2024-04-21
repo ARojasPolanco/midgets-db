@@ -28,9 +28,6 @@ export class CompetitionService {
 
     async findAllCompetition() {
         return await Competition.findAll({
-            where: {
-                status: 'waiting'
-            },
             include: Racer
         });
     }
@@ -65,7 +62,6 @@ export class CompetitionService {
     async updateCompetition(competition, data) {
         return await competition.update(data)
     }
-
 
     async finishCompetition(competition) {
         return await competition.update({

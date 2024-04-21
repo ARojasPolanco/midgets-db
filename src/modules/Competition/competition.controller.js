@@ -1,5 +1,4 @@
 import { AppError, catchAsync } from '../../errors/index.js';
-import Racer from '../Racer/racer.model.js';
 import { validateCompetition } from './competition.schema.js'
 import { CompetitionService } from './competition_service.js'
 

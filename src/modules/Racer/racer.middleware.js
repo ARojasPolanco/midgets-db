@@ -15,5 +15,4 @@ export const validExistRacer = catchAsync(async (req, res, next) => {
 
     req.racer = racer;
     next()
-
 })
